@@ -1,4 +1,15 @@
 # poker-game
+### 在线预览 
+- 地址：https://1343460872.github.io/poker-game-demo/dist/
+```
+若无法访问 请打开host( C:\WINDOWS\system32\drivers\etc )文件，添加以下内容
+```
+```
+185.199.108.153 1343460872.github.io
+185.199.109.153 1343460872.github.io
+185.199.110.153 1343460872.github.io
+185.199.110.153 1343460872.github.io
+```
 ### 游戏介绍
 ```
 15个任意物品（可以是火柴牙签poker）
