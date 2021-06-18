@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <el-row>
+      <el-button @click="submit" type="primary">快速开始游戏</el-button>
+      <el-button @click="setting">游戏设置</el-button>
+    </el-row>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  data: () => {
+    return {
+    }
+  },
+  computed: {
+  },
+  methods: {
+    submit () {
+      this.$router.push({ path: '/game' })
+    },
+    setting () {
+      this.$router.push({ path: '/setting' })
+    }
   }
 }
+
 </script>
