@@ -1,5 +1,5 @@
 const state = {
-  board: [3, 1, 2],
+  board: [3, 5, 7],
   players: ['A', 'B']
 }
 
