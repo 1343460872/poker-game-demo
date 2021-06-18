@@ -91,14 +91,12 @@ const actions = {
     return new Promise((resolve, reject) => {
       const newBoard = state.board.slice(0)
       newBoard[row][i] = newBoard[row][i] === type ? 0 : type
-      console.log(newBoard)
       commit('SETBOARD', newBoard)
       resolve()
     })
   },
   InitGame ({ commit, dispatch, state, rootState }) {
     return new Promise((resolve, reject) => {
-      console.log(rootState.setting.board)
       commit('RESETSTATE')
       dispatch('SetBoard', rootState.setting.board)
       dispatch('InitPlayer')

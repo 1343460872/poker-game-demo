@@ -13,6 +13,7 @@
           <div slot="content" v-html="fillTip"></div>
           <el-button @click="fillAndSubmit" type="info" icon="el-icon-info">设置默认</el-button>
         </el-tooltip>
+        <el-button @click="start" type="primary">开始游戏</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -25,37 +26,22 @@ export default {
   name: 'Setting',
   data: () => {
     return {
+      players: null,
+      board: null,
       default: {
-        players: ['A,B'],
-        board: ['3,5,7']
+        players: 'A,B',
+        board: '3,5,7'
       }
     }
   },
   computed: {
     fillTip () {
       return `玩家昵称：${this.default.players}<br />参数设置：${this.default.board}`
-    },
-    players: {
-      get: function () {
-        return this.$store.state.setting.players.join(',')
-      },
-      set: function (v) {
-        this.SetPlayer(v)
-        return v
-      }
-    },
-    board: {
-      get: function () {
-        return this.$store.state.setting.board.join(',')
-      },
-      set: function (v) {
-        this.SetBoard(v)
-        return v
-      }
     }
   },
   methods: {
     ...mapActions({
+      InitGame: 'game/InitGame',
       SetBoard: 'setting/SetBoard',
       SetPlayers: 'setting/SetPlayers'
     }),
@@ -68,16 +54,20 @@ export default {
         this.$message.error('参数设置验证不通过')
         return
       }
-      this.SetBoard(this.board.split(','))
+      this.SetBoard(this.board.split(',').map(v => {
+        v = Number(v)
+        return v
+      }))
       this.SetPlayers(this.players.split(','))
-      this.$message.success('游戏设置成功，将进入游戏界面')
-      setTimeout(() => {
-        this.$router.push({ path: '/game' })
-      }, 1000)
+      this.$message.success('游戏设置成功')
+    },
+    start () {
+      this.$router.push({ path: '/game' })
+      this.InitGame()
     },
     fill () {
-      this.SetBoard(this.default.board)
-      this.SetPlayers(this.default.players)
+      this.players = this.default.players
+      this.board = this.default.board
     },
     fillAndSubmit () {
       this.fill()

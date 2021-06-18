@@ -4,7 +4,7 @@
       <template v-if="gameStatus!=='end'">
         <span>玩家：{{ player }}</span>
         <el-button
-          :disabled="disabled"
+          :disabled="nextDisabled"
           @click="next">确定
         </el-button>
       </template>
@@ -17,7 +17,7 @@
 
 <script>
 import Board from '@/components/board'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Game',
@@ -37,10 +37,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('game', ['nextDisabled']),
     ...mapState({
       gameStatus: (state) => state.game.status,
-      player: (state) => state.game.activePlayer,
-      disabled: (state) => state.game.nextDisabled
+      player: (state) => state.game.activePlayer
     })
   },
   data: () => {
